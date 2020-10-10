@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "AngularCourseRouting"
+    }
+  },
+  "defaultProject": "AngularCourseRouting",
+  "cli": {
+    "analytics": "781fbbd4-603b-4e03-a9bd-93b5ad660afc"
+  }
 }
