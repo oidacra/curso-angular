@@ -7,7 +7,6 @@ import { NotFoundComponent } from './components/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'inicio', component: WelcomeComponent },
 
   // Lazy Load de Módulo
   {
@@ -17,7 +16,7 @@ const routes: Routes = [
         (m) => m.ExamplesModule
       ),
   },
-
+  { path: 'inicio', component: WelcomeComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
