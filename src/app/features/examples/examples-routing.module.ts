@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+<<<<<<< HEAD
 import { AttributeBindingComponent } from './components/attribute-binding.component';
 import { ClassBindingComponent } from './components/class-binding.component';
 import { EventBindingComponent } from './components/event-binding.component';
@@ -10,6 +11,18 @@ import { PropertyBindingComponent } from './components/property-binding.componen
 import { StyleBindingComponent } from './components/style-binding.component';
 import { TemplateVariableComponent } from './components/template-variable.component';
 import { TwoWayBindingComponent } from './components/two-way-binding.component';
+=======
+// Componentes
+import { AttributeBindingComponent } from './components/attribute-binding.component';
+import { PropertyBindingComponent } from './components/property-binding.component';
+import { EventBindingComponent } from './components/event-binding.component';
+import { ClassBindingComponent } from './components/class-binding.component';
+import { StyleBindingComponent } from './components/style-binding.component';
+import { EventFilteringComponent } from './components/event-filtering.component';
+import { TwoWayBindingComponent } from './components/two-way-binding.component';
+import { TemplateVariableComponent } from './components/template-variable.component';
+import { PipesComponent } from './components/pipes.component';
+>>>>>>> material
 
 const routes: Routes = [
   {

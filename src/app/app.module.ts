@@ -1,22 +1,39 @@
+import { MenuComponent } from './core/components/menu.component';
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 
 import { CoreModule } from './core/core.module';
-import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { TopbarComponent } from './layout/topbar/topbar.component';
-import { NotFoundComponent } from './components/not-found.component';
 import { WelcomeComponent } from './components/welcome.component';
+
+// Material
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MenuComponent,
     TopbarComponent,
-    NotFoundComponent,
     WelcomeComponent,
   ],
-  imports: [CoreModule, AppRoutingModule, RouterModule],
+  imports: [
+    RouterModule,
+    CoreModule,
+    AppRoutingModule,
+    // Material
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+  ],
 
   bootstrap: [AppComponent],
 })
