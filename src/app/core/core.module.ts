@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import { NgModule } from '@angular/core';
-
-import { BrowserModule } from '@angular/platform-browser';
-
-@NgModule({
-  declarations: [],
-  imports: [BrowserModule],
-  exports: [BrowserModule],
-=======
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,6 +15,5 @@ const CORE_MODULES = [
   declarations: [],
   imports: [CORE_MODULES],
   exports: [CORE_MODULES],
->>>>>>> material
 })
 export class CoreModule {}
