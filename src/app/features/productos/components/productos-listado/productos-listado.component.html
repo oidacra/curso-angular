@@ -1,0 +1,13 @@
+<div class="listado-container">
+  <h2>Productos disponibles</h2>
+  <mat-list role="list">
+    <mat-list-item
+      *ngFor="let producto of productos; last as last"
+      (click)="selectProducto(producto.id)"
+      [class.selected]="selectedId === producto.id"
+    >
+      {{ producto.name }}
+      <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</div>

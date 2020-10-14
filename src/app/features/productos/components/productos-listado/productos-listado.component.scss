@@ -1,0 +1,10 @@
+:host {
+  .listado-container {
+    padding-right: 1px;
+    mat-list-item {
+      &.selected {
+        background-color: #fefefe;
+      }
+    }
+  }
+}

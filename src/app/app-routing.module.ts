@@ -17,6 +17,13 @@ const routes: Routes = [
       ),
   },
   { path: 'inicio', component: WelcomeComponent },
+  {
+    path: 'productos',
+    loadChildren: () =>
+      import('./features/productos/productos.module').then(
+        (m) => m.ProductosModule
+      ),
+  },
   { path: '**', component: NotFoundComponent },
 ];
 

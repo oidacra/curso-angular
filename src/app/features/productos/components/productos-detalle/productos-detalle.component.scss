@@ -1,0 +1,29 @@
+.detalle-container {
+  padding: 15px;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  min-height: 50%;
+  img {
+    max-width: 250px;
+  }
+  .detalles {
+    position: relative;
+    table {
+      width: 100%;
+      th {
+        background-color: #fefefe;
+        width: 30%;
+        font-weight: bold;
+      }
+      td {
+      }
+    }
+    .button-container {
+      position: absolute;
+      right: 15px;
+      top: 0px;
+    }
+  }
+}

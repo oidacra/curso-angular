@@ -10,10 +10,12 @@ interface IMenu {
   selector: 'app-menu',
   template: `
     <mat-list role="list">
-      <mat-list-item *ngFor="let url of mainMenu">
-        <a [routerLink]="url.path" routerLinkActive="active-link">{{
-          url.name
-        }}</a>
+      <mat-list-item
+        *ngFor="let url of mainMenu"
+        [routerLink]="url.path"
+        routerLinkActive="active-link"
+      >
+        {{ url.name }}
       </mat-list-item>
     </mat-list>
   `,
@@ -36,5 +38,6 @@ export class MenuComponent {
     { name: 'Template variable', path: 'examples/template-variable' },
     { name: 'Two way', path: 'examples/two-way-binding' },
     { name: 'Pipes', path: 'examples/pipes' },
+    { name: 'Productos', path: 'productos' },
   ];
 }

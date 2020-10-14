@@ -1,0 +1,14 @@
+<div class="productos-page" fxFlexFill fxLayout="row">
+  <app-productos-listado
+    fxFlex="20"
+    [productos]="products"
+    [selectedId]="selectedProductId"
+    (selectedItemChild)="selectedProductParent($event)"
+  ></app-productos-listado>
+
+  <app-productos-detalle
+    fxFlex="80"
+    [producto]="productoSelectedParent"
+    (clearSelectionChild)="resetSelection()"
+  ></app-productos-detalle>
+</div>
