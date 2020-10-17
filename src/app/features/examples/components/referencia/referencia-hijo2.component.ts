@@ -12,7 +12,8 @@ import { ReferenciaHijo1Component } from './referencia-hijo1.component';
 export class ReferenciaHijo2Component {
   @Input()
   hijo1Component: ReferenciaHijo1Component;
+
   cambiarPropertyHijo1() {
-    this.hijo1Component.propertyHijo1 = 'Valor cambiado desde Hijo2';
+    this.hijo1Component.propertyHijo1 = 'Cambio de titulo desde hijo2';
   }
 }

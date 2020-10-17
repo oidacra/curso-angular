@@ -24,6 +24,7 @@ export class ProductosService {
         this.__products = productos;
       });
   }
+
   public selectProducto(productId: number) {
     const productoSelectedData = this.__products.find(
       (producto: IProductos) => producto.id === productId

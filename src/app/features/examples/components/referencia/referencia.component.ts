@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
           #hijo1Component
           fxFlex="20"
         ></app-referencia-hijo1>
+
         <app-referencia-hijo2
           [hijo1Component]="hijo1Component"
           fxFlex

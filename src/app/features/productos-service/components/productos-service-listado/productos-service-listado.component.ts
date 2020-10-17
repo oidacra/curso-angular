@@ -8,31 +8,18 @@ import { Subscription } from 'rxjs';
   templateUrl: './productos-service-listado.component.html',
   styleUrls: ['./productos-service-listado.component.scss'],
 })
-export class ProductosServiceListadoComponent implements OnInit, OnDestroy {
-  public productos: IProductos[];
+export class ProductosServiceListadoComponent implements OnInit {
   selectedId: number;
-
-  public productos$: EventEmitter<IProductos[]>;
-
-  // private __suscriptions = new Subscription();
+  public productos$;
 
   constructor(private productosServices: ProductosService) {}
 
   ngOnInit(): void {
-    /* this.__suscriptions.add(
-      this.productosServices.productos.subscribe((productos) => {
-        this.productos = productos;
-      })
-    ); */
-
     this.productos$ = this.productosServices.productos;
   }
+
   selectProducto(productoId: number) {
     this.selectedId = productoId;
     this.productosServices.selectProducto(productoId);
-  }
-
-  ngOnDestroy() {
-    /* this.__suscriptions.unsubscribe();  */
   }
 }
