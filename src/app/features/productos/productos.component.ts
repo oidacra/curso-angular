@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductosComponent implements OnInit {
   public products: IProductos[] = [];
-  public productoSelectedParent: IProductos;
+  public productoSelectedParent: IProductos | undefined = undefined;
   public selectedProductId: number = 0;
 
   constructor(private httpClient: HttpClient) {}
@@ -31,7 +31,7 @@ export class ProductosComponent implements OnInit {
   }
 
   resetSelection() {
-    this.productoSelectedParent = null;
+    this.productoSelectedParent = undefined;
     this.selectedProductId = 0;
   }
 }

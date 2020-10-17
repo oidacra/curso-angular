@@ -24,6 +24,7 @@ const routes: Routes = [
         (m) => m.ProductosModule
       ),
   },
+  { path: 'productos-service', loadChildren: () => import('./features/productos-service/productos-service.module').then(m => m.ProductosServiceModule) },
   { path: '**', component: NotFoundComponent },
 ];
 
