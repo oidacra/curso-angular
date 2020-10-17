@@ -11,6 +11,7 @@ import { EventFilteringComponent } from './components/event-filtering.component'
 import { TwoWayBindingComponent } from './components/two-way-binding.component';
 import { TemplateVariableComponent } from './components/template-variable.component';
 import { PipesComponent } from './components/pipes.component';
+import { ReferenciaComponent } from './components/referencia/referencia.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: 'pipes',
     component: PipesComponent,
+  },
+  {
+    path: 'componente-referencia',
+    component: ReferenciaComponent,
   },
 ];
 

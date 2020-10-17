@@ -38,6 +38,7 @@ export class MenuComponent {
     { name: 'Template variable', path: 'examples/template-variable' },
     { name: 'Two way', path: 'examples/two-way-binding' },
     { name: 'Pipes', path: 'examples/pipes' },
+    { name: 'Componente Referencia', path: 'examples/componente-referencia' },
     { name: 'Productos', path: 'productos' },
   ];
 }

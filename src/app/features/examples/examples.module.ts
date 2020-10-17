@@ -13,6 +13,9 @@ import { EventFilteringComponent } from './components/event-filtering.component'
 import { TemplateVariableComponent } from './components/template-variable.component';
 import { TwoWayBindingComponent } from './components/two-way-binding.component';
 import { PipesComponent } from './components/pipes.component';
+import { ReferenciaComponent } from './components/referencia/referencia.component';
+import { ReferenciaHijo1Component } from './components/referencia/referencia-hijo1.component';
+import { ReferenciaHijo2Component } from './components/referencia/referencia-hijo2.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { PipesComponent } from './components/pipes.component';
     TemplateVariableComponent,
     TwoWayBindingComponent,
     PipesComponent,
+    ReferenciaComponent,
+    ReferenciaHijo1Component,
+    ReferenciaHijo2Component,
   ],
   imports: [SharedModule, ExamplesRoutingModule],
 })
