@@ -40,5 +40,6 @@ export class MenuComponent {
     { name: 'Pipes', path: 'examples/pipes' },
     { name: 'Componente Referencia', path: 'examples/componente-referencia' },
     { name: 'Productos', path: 'productos' },
+    { name: 'Productos Service', path: 'productos-service' },
   ];
 }
