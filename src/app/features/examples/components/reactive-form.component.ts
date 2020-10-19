@@ -19,6 +19,7 @@ import {
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Correo</mat-label>
+
           <input
             id="email"
             type="email"
@@ -27,6 +28,7 @@ import {
             placeholder="user@email.com"
             autocomplete="off"
           />
+
           <mat-error *ngIf="form.get('email').hasError('required')"
             >Campo requerido</mat-error
           >

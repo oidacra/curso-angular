@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-template-driven',
@@ -22,6 +21,7 @@ import { FormControl } from '@angular/forms';
         El nombre debe contener almenos de 4 carácteres.
       </div>
     </div>
+
     <p>Value del input: {{ username }}</p>
 
     <p>¿Dirty?: {{ name.dirty }}</p>
@@ -51,10 +51,10 @@ export class TemplateDrivenComponent {
 
   changeValueInput() {
     console.log(this.username);
-    this.username = 'asdadasdad';
+    this.username = 'Pedro';
   }
 
   onSubmit() {
-    alert('Formulario enviado');
+    alert('Formulario enviado: ' + this.username);
   }
 }
