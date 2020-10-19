@@ -58,7 +58,7 @@ import {
         </div>
       </form>
 
-      <p>¿Dirty?: {{ form.dirty }}</p>
+      <!-- <p>¿Dirty?: {{ form.dirty }}</p>
       <p>Pristine?: {{ form.pristine }}</p>
       <p>¿Touched?: {{ form.touched }}</p>
       <p>¿Invalid?: {{ form.invalid }}</p>
@@ -67,7 +67,7 @@ import {
         {{ form.value | json }}
 
       </pre
-      >
+      > -->
     </div>
   `,
   styles: [
@@ -95,19 +95,26 @@ import {
   ],
 })
 export class ReactiveFormComponent implements OnInit {
+  // Creación de property para el Group principal del form
   form: FormGroup;
+  // Inyectamos FormBuilder que es un servicio para crear forms.
   constructor(private fb: FormBuilder) {}
 
+  // obtener una property del class por getter
   get password(): FormControl {
     return this.form.get('password') as FormControl;
   }
+
   ngOnInit(): void {
+    // Podemos crear el form de distintas formas
     this.createForm();
   }
 
   createForm() {
+    // Es la forma mas comun de crear forms con el formbuilder
+    // tambien podemos crearlos con FormControl, FormGroup
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]], // Podemos utilizar validaciones build-in o hacer las propias
       password: ['', Validators.required],
     });
   }
@@ -121,6 +128,8 @@ export class ReactiveFormComponent implements OnInit {
       // si no, muestro un mensaje de error al usuario
     }
   }
+
+  // Método de reset del formulario
   resetForm() {
     this.form.reset('');
 
