@@ -39,6 +39,8 @@ export class MenuComponent {
     { name: 'Two way', path: 'examples/two-way-binding' },
     { name: 'Pipes', path: 'examples/pipes' },
     { name: 'Componente Referencia', path: 'examples/componente-referencia' },
+    { name: 'Template Driven Form', path: 'examples/template-driven' },
+    { name: 'Reactive Form', path: 'examples/reactive-form' },
     { name: 'Productos', path: 'productos' },
   ];
 }

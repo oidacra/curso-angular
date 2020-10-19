@@ -16,6 +16,8 @@ import { PipesComponent } from './components/pipes.component';
 import { ReferenciaComponent } from './components/referencia/referencia.component';
 import { ReferenciaHijo1Component } from './components/referencia/referencia-hijo1.component';
 import { ReferenciaHijo2Component } from './components/referencia/referencia-hijo2.component';
+import { TemplateDrivenComponent } from './components/template-driven.component';
+import { ReactiveFormComponent } from './components/reactive-form.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ReferenciaHijo2Component } from './components/referencia/referencia-hij
     ReferenciaComponent,
     ReferenciaHijo1Component,
     ReferenciaHijo2Component,
+    TemplateDrivenComponent,
+    ReactiveFormComponent,
   ],
   imports: [SharedModule, ExamplesRoutingModule],
 })

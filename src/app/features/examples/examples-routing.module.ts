@@ -1,3 +1,4 @@
+import { TemplateDrivenComponent } from './components/template-driven.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -12,6 +13,7 @@ import { TwoWayBindingComponent } from './components/two-way-binding.component';
 import { TemplateVariableComponent } from './components/template-variable.component';
 import { PipesComponent } from './components/pipes.component';
 import { ReferenciaComponent } from './components/referencia/referencia.component';
+import { ReactiveFormComponent } from './components/reactive-form.component';
 
 const routes: Routes = [
   {
@@ -53,6 +55,14 @@ const routes: Routes = [
   {
     path: 'componente-referencia',
     component: ReferenciaComponent,
+  },
+  {
+    path: 'template-driven',
+    component: TemplateDrivenComponent,
+  },
+  {
+    path: 'reactive-form',
+    component: ReactiveFormComponent,
   },
 ];
 
