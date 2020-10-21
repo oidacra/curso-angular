@@ -1,13 +1,24 @@
-<div class="listado-container">
-  <h2>Productos disponibles</h2>
-  <mat-list role="list">
-    <mat-list-item
-      *ngFor="let producto of productos$ | async as productos; last as last"
-      (click)="selectProducto(producto.id)"
-      [class.selected]="selectedId === producto.id"
-    >
-      {{ producto.name }}
-      <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
-    </mat-list-item>
-  </mat-list>
+<div class="listado-container" fxLayout="column">
+  <div class="top" fxLayout="row" fxLayoutAlign="space-around center">
+    <h2>Productos disponibles</h2>
+
+    <button [routerLink]="['add']" mat-mini-fab aria-label="Add product">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="listado">
+    <mat-list role="list">
+      <mat-list-item
+        *ngFor="
+          let producto of productosObservable$ | async as productos;
+          last as last
+        "
+        (click)="selectProducto(producto.id)"
+        [class.selected]="selectedId === producto.id"
+      >
+        {{ producto.name }}
+        <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </div>
 </div>

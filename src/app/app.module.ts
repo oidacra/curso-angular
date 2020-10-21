@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { ProductosService } from './features/productos-service/services/productos.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { MatListModule } from '@angular/material/list';
   ],
   imports: [
     RouterModule,
+    HttpClientModule,
     CoreModule,
     AppRoutingModule,
     // Material
@@ -34,7 +37,7 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatListModule,
   ],
-
+  //providers: [ProductosService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

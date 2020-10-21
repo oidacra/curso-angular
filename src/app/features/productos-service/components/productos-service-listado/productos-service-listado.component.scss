@@ -1,6 +1,9 @@
 :host {
   .listado-container {
     padding-right: 1px;
+    h2 {
+      margin: 0;
+    }
     mat-list-item {
       &.selected {
         background-color: #fefefe;

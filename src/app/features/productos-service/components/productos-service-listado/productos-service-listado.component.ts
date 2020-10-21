@@ -11,11 +11,13 @@ import { Subscription } from 'rxjs';
 export class ProductosServiceListadoComponent implements OnInit {
   selectedId: number;
   public productos$;
+  public productosObservable$;
 
   constructor(private productosServices: ProductosService) {}
 
   ngOnInit(): void {
-    this.productos$ = this.productosServices.productos;
+    //this.productos$ = this.productosServices.productos;
+    this.productosObservable$ = this.productosServices.productos;
   }
 
   selectProducto(productoId: number) {
