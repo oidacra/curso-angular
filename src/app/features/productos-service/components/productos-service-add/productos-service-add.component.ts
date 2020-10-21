@@ -16,9 +16,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./productos-service-add.component.scss'],
 })
 export class ProductosServiceAddComponent implements OnInit {
-  public form: FormGroup;
-  control: FormControl;
-  tmp$: Observable<IProductos[]>;
+  public formGrup: FormGroup; // <- agrupa controles
+
   constructor(
     private formBuilder: FormBuilder,
     private productosService: ProductosService,
@@ -30,8 +29,7 @@ export class ProductosServiceAddComponent implements OnInit {
   }
 
   buildForm() {
-    this.control = new FormControl('control');
-    this.form = this.formBuilder.group({
+    this.formGrup = this.formBuilder.group({
       sku: ['', [Validators.required, Validators.minLength(4)]],
       name: ['', [Validators.required, Validators.minLength(4)]],
       brand: ['', Validators.required],
@@ -42,15 +40,15 @@ export class ProductosServiceAddComponent implements OnInit {
     });
   }
   onSubmit() {
-    if (this.form.valid) {
+    if (this.formGrup.valid) {
+      this.formGrup.disable();
       console.log('Form Submitted!');
-      this.productosService.add(this.form.value);
+      this.productosService.add(this.formGrup.value);
+      // Redirect a modulo
       this.router.navigate(['/productos-service']);
-      this.tmp$ = this.productosService.productos;
-      this.form.disable();
     }
   }
   resetForm() {
-    this.form.reset();
+    this.formGrup.reset();
   }
 }
