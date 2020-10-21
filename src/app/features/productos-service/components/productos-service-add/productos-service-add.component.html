@@ -1,0 +1,50 @@
+<div class="product-add-page" fxLayout="column" fxFlex="30">
+  <h1>Agregar nuevo producto</h1>
+  <form [formGroup]="formGrup" (ngSubmit)="onSubmit()" novalidate>
+    <mat-form-field appearance="fill">
+      <mat-label>SKU:</mat-label>
+      <input formControlName="sku" matInput placeholder="AS1234" />
+
+      <mat-error *ngIf="formGrup.controls['sku'].invalid"
+        >El SKU es un campo requerido</mat-error
+      >
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre:</mat-label>
+      <input formControlName="name" matInput placeholder="XIAOMI MI NOTE 10" />
+      <mat-error *ngIf="formGrup.controls['sku'].invalid"
+        >Debe ingresar un nombre de producto</mat-error
+      >
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label>Marca:</mat-label>
+      <input formControlName="brand" matInput placeholder="Samsung" />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label>Categoría:</mat-label>
+      <input formControlName="category" matInput placeholder="Celulares" />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label>Precio:</mat-label>
+      <input formControlName="price" matInput placeholder="10.55" />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label>Cantidad disponibles:</mat-label>
+      <input formControlName="stock" type="number" matInput placeholder="100" />
+    </mat-form-field>
+
+    <div class="actions">
+      <button mat-stroked-button color="primary" (click)="resetForm()">
+        Limpiar
+      </button>
+      <button mat-flat-button color="primary" [disabled]="!formGrup.valid">
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>

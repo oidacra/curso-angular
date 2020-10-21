@@ -1,6 +1,12 @@
 <div class="detalle-container" fxLayout="row" *ngIf="producto; else mensaje">
   <div class="imagen" fxFlex="20">
-    <img mat-card-image [src]="producto.image" alt="{{ producto.name }}" />
+    <img
+      *ngIf="producto.image; else noImage"
+      mat-card-image
+      [src]="producto.image"
+      alt="{{ producto.name }}"
+    />
+    <ng-template #noImage> Sin Imagen </ng-template>
   </div>
   <div class="detalles" fxFlex="80">
     <table>

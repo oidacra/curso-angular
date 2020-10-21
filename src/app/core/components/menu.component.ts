@@ -42,5 +42,6 @@ export class MenuComponent {
     { name: 'Template Driven Form', path: 'examples/template-driven' },
     { name: 'Reactive Form', path: 'examples/reactive-form' },
     { name: 'Productos', path: 'productos' },
+    { name: 'Productos Service', path: 'productos-service' },
   ];
 }
