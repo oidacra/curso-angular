@@ -22,6 +22,6 @@ export class ProductosServiceListadoComponent implements OnInit {
 
   selectProducto(productoId: number) {
     this.selectedId = productoId;
-    this.productosServices.selectProducto(productoId);
+    //this.productosServices.selectProducto(productoId);
   }
 }

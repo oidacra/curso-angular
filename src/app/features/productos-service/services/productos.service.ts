@@ -7,7 +7,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductosService {
-  private __products: IProductos[];
+  private __products: IProductos[] | undefined;
 
   private __productosBehaviorSubject = new BehaviorSubject<IProductos[]>(null);
 
@@ -38,10 +38,13 @@ export class ProductosService {
   }
 
   public selectProducto(productId: number) {
-    const productoSelectedData = this.__products.find(
-      (producto: IProductos) => producto.id === productId
-    );
-    this.selectedProductData.emit(productoSelectedData);
+    console.log(this.__products);
+    if (this.__products) {
+      const productoSelectedData = this.__products.find(
+        (producto: IProductos) => producto.id === productId
+      );
+      this.selectedProductData.emit(productoSelectedData);
+    }
   }
 
   public clearSelected() {
