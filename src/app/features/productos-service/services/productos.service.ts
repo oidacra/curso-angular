@@ -11,6 +11,7 @@ import {
 } from 'rxjs';
 
 import { map, tap, shareReplay, catchError, scan } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +52,7 @@ export class ProductosService {
     shareReplay(1)
   );
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private firestore: AngularFirestore) {
     console.log('constructor load data');
 
     this.http
@@ -83,6 +84,10 @@ export class ProductosService {
     producto.id = Math.floor(Math.random() * 100); // genero un id random, esto puede asignar numeros que ya esten utilizados, en un api normal el backend se encarga de hacer esot
 
     this.__productInsertedSubject.next(producto);
+
+    return this.http
+      .post(this.productsUrl, producto)
+      .pipe(map((val) => console.log(val)));
   }
 
   private handleError(err: any): Observable<never> {
@@ -99,5 +104,10 @@ export class ProductosService {
     }
     console.error(err);
     return throwError(errorMessage);
+  }
+
+  // FIREBASE
+  getAllFromFirebase(isActive: boolean = true): Observable<IProductos[]> {
+    return this.firestore.collection<IProductos>('productos').valueChanges(); // <- Returns an Observable of document data. All Snapshot metadata is stripped. This method provides only the data.
   }
 }

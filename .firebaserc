@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "curso-angular-d5c09"
+  },
+  "targets": {
+    "curso-angular-d5c09": {
+      "hosting": {
+        "AngularCourseRouting": [
+          "curso-angular-d5c09"
+        ]
+      }
+    }
+  }
+}
