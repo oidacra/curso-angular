@@ -1,60 +1,103 @@
 import { IProductos } from './../../productos/models/productos';
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
+import {
+  BehaviorSubject,
+  combineLatest,
+  merge,
+  Observable,
+  Subject,
+  throwError,
+} from 'rxjs';
 
-import { BehaviorSubject } from 'rxjs';
+import { map, tap, shareReplay, catchError, scan } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductosService {
-  private __products: IProductos[];
+  private productsUrl = '/api/productos';
 
-  private __productosBehaviorSubject = new BehaviorSubject<IProductos[]>(null);
-  //public productObservable$ = this.__productosBehaviorSubject.asObservable(); <- otra forma de emitir un Observable
+  private __productDataBehaviorSubject = new Subject<IProductos[]>();
+  products$ = this.__productDataBehaviorSubject.asObservable();
 
-  /* @Output()
-  productos = new EventEmitter<IProductos[]>(); */
+  private __productSelectedIdSubject = new BehaviorSubject<number>(0);
 
-  @Output()
-  selectedProductData = new EventEmitter<IProductos>();
+  // Action Stream
+  private __productInsertedSubject = new Subject<IProductos>();
+  productInsertedAction$ = this.__productInsertedSubject.asObservable();
 
-  constructor(private httpClient: HttpClient) {
-    this.__getAll();
-    console.log('Load productos');
+  productsWithAdd$ = merge(this.products$, this.productInsertedAction$).pipe(
+    scan((acc: IProductos[], value: IProductos) => {
+      return [...acc, value];
+    }),
+    catchError((err) => {
+      return throwError(err);
+    })
+  );
+
+  selectedProduct$ = combineLatest([
+    this.productsWithAdd$,
+    this.productoSelectedId$,
+  ]).pipe(
+    map(([products, selectedProductId]) => {
+      console.log(products); // <- Valor emitido de primer observable
+      console.log(selectedProductId); // Valor emitido del segundo observable
+      if (products) {
+        return products.find((product) => product.id === selectedProductId);
+      }
+    }),
+    tap((product) => console.log('selectedProduct', product)),
+    shareReplay(1)
+  );
+
+  constructor(private http: HttpClient) {
+    console.log('constructor load data');
+
+    this.http
+      .get<IProductos[]>(this.productsUrl)
+      .pipe(
+        tap((data) => console.log('Products', JSON.stringify(data))),
+        catchError(this.handleError)
+      )
+      .subscribe((data: IProductos[]) => {
+        console.log(data);
+
+        this.__productDataBehaviorSubject.next(data);
+      });
   }
 
-  // Getter
-  get productos() {
-    return this.__productosBehaviorSubject.asObservable();
+  get productoSelectedId$() {
+    return this.__productSelectedIdSubject.asObservable();
   }
 
   public selectProducto(productId: number) {
-    const productoSelectedData = this.__products.find(
-      (producto: IProductos) => producto.id === productId
-    );
-    this.selectedProductData.emit(productoSelectedData);
+    this.__productSelectedIdSubject.next(productId);
   }
 
   public clearSelected() {
-    this.selectedProductData.emit();
+    this.__productSelectedIdSubject.next(0);
   }
 
   public add(producto: IProductos) {
-    producto.id = this.__products.length + 1;
-    this.__products.push(producto);
+    producto.id = Math.floor(Math.random() * 100); // genero un id random, esto puede asignar numeros que ya esten utilizados, en un api normal el backend se encarga de hacer esot
 
-    this.__productosBehaviorSubject.next(this.__products);
+    this.__productInsertedSubject.next(producto);
   }
 
-  private __getAll() {
-    this.httpClient
-      .get<IProductos[]>('assets/products.json')
-      .subscribe((productos: IProductos[]) => {
-        // Lo guardo para despues
-        this.__products = productos;
-        // Emito
-        this.__productosBehaviorSubject.next(this.__products);
-      });
+  private handleError(err: any): Observable<never> {
+    // in a real world app, we may send the server to some remote logging infrastructure
+    // instead of just logging it to the console
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
+    }
+    console.error(err);
+    return throwError(errorMessage);
   }
 }

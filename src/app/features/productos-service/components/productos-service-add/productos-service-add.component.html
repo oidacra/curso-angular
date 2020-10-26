@@ -1,11 +1,11 @@
-<div class="product-add-page" fxLayout="column" fxFlex="30">
+<div class="product-add-page" fxLayout="column" fxFlex="90">
   <h1>Agregar nuevo producto</h1>
-  <form [formGroup]="formGrup" (ngSubmit)="onSubmit()" novalidate>
+  <form [formGroup]="form" novalidate>
     <mat-form-field appearance="fill">
       <mat-label>SKU:</mat-label>
       <input formControlName="sku" matInput placeholder="AS1234" />
 
-      <mat-error *ngIf="formGrup.controls['sku'].invalid"
+      <mat-error *ngIf="form.controls['sku'].invalid"
         >El SKU es un campo requerido</mat-error
       >
     </mat-form-field>
@@ -13,7 +13,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Nombre:</mat-label>
       <input formControlName="name" matInput placeholder="XIAOMI MI NOTE 10" />
-      <mat-error *ngIf="formGrup.controls['sku'].invalid"
+      <mat-error *ngIf="form.controls['sku'].invalid"
         >Debe ingresar un nombre de producto</mat-error
       >
     </mat-form-field>
@@ -37,14 +37,21 @@
       <mat-label>Cantidad disponibles:</mat-label>
       <input formControlName="stock" type="number" matInput placeholder="100" />
     </mat-form-field>
-
-    <div class="actions">
-      <button mat-stroked-button color="primary" (click)="resetForm()">
-        Limpiar
-      </button>
-      <button mat-flat-button color="primary" [disabled]="!formGrup.valid">
-        Guardar
-      </button>
-    </div>
   </form>
+  <div class="actions">
+    <button mat-stroked-button color="primary" (click)="dialogRef.close()">
+      Cancelar
+    </button>
+    <button mat-stroked-button color="primary" (click)="resetForm()">
+      Limpiar
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="!form.valid"
+      (click)="onSubmit()"
+    >
+      Guardar
+    </button>
+  </div>
 </div>

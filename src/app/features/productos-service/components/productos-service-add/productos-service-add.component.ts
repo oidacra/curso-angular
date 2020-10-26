@@ -1,5 +1,3 @@
-import { IProductos } from './../../../productos/models/productos';
-import { Router } from '@angular/router';
 import { ProductosService } from './../../services/productos.service';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -8,7 +6,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
+
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-productos-service-add',
@@ -16,12 +15,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./productos-service-add.component.scss'],
 })
 export class ProductosServiceAddComponent implements OnInit {
-  public formGrup: FormGroup; // <- agrupa controles
+  public form: FormGroup;
+  control: FormControl;
 
   constructor(
+    public dialogRef: MatDialogRef<ProductosServiceAddComponent>,
     private formBuilder: FormBuilder,
-    private productosService: ProductosService,
-    private router: Router
+    private productosService: ProductosService
   ) {}
 
   ngOnInit(): void {
@@ -29,26 +29,26 @@ export class ProductosServiceAddComponent implements OnInit {
   }
 
   buildForm() {
-    this.formGrup = this.formBuilder.group({
-      sku: ['', [Validators.required, Validators.minLength(4)]],
-      name: ['', [Validators.required, Validators.minLength(4)]],
-      brand: ['', Validators.required],
-      category: '',
-      price: ['', Validators.required],
-      stock: ['', Validators.required],
+    this.control = new FormControl('control');
+    this.form = this.formBuilder.group({
+      sku: ['1222', [Validators.required, Validators.minLength(4)]],
+      name: ['Iphone 12', [Validators.required, Validators.minLength(4)]],
+      brand: ['Apple', Validators.required],
+      category: 'Celulares',
+      price: ['1110', Validators.required],
+      stock: ['2', Validators.required],
       image: '',
     });
   }
   onSubmit() {
-    if (this.formGrup.valid) {
-      this.formGrup.disable();
-      console.log('Form Submitted!');
-      this.productosService.add(this.formGrup.value);
-      // Redirect a modulo
-      this.router.navigate(['/productos-service']);
+    if (this.form.valid) {
+      this.productosService.add(this.form.value);
+      this.dialogRef.close();
+      this.form.disable();
     }
   }
   resetForm() {
-    this.formGrup.reset();
+    this.form.reset();
+    this.form.enable();
   }
 }

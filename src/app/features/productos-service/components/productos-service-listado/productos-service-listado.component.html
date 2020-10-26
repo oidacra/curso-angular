@@ -2,22 +2,23 @@
   <div class="top" fxLayout="row" fxLayoutAlign="space-around center">
     <h2>Productos disponibles</h2>
 
+<<<<<<< HEAD
     <button
       [routerLink]="['add']"
       mat-mini-fab
       aria-label="Boton de agregar producto"
     >
+=======
+    <button (click)="openDialog()" mat-mini-fab aria-label="Add product">
+>>>>>>> productos-route-id
       <mat-icon>add</mat-icon>
     </button>
   </div>
   <div class="listado">
     <mat-list role="list">
       <mat-list-item
-        *ngFor="
-          let producto of productosObservable$ | async as productos;
-          last as last
-        "
-        (click)="selectProducto(producto.id)"
+        *ngFor="let producto of productos; last as last"
+        (click)="selectProduct(producto.id)"
         [class.selected]="selectedId === producto.id"
       >
         {{ producto.name }}
@@ -26,3 +27,4 @@
     </mat-list>
   </div>
 </div>
+<p>{{ check() }}</p>
