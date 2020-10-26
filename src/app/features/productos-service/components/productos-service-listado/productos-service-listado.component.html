@@ -13,11 +13,8 @@
   <div class="listado">
     <mat-list role="list">
       <mat-list-item
-        *ngFor="
-          let producto of productosObservable$ | async as productos;
-          last as last
-        "
-        [routerLink]="['/productos-service', producto.id]"
+        *ngFor="let producto of productos; last as last"
+        (click)="goToProduct(producto.id)"
         [class.selected]="selectedId === producto.id"
       >
         {{ producto.name }}
@@ -26,3 +23,4 @@
     </mat-list>
   </div>
 </div>
+<p>{{ check() }}</p>

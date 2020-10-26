@@ -1,10 +1,14 @@
-<div class="detalle-container" fxLayout="row" *ngIf="producto; else mensaje">
+<div
+  class="detalle-container"
+  fxLayout="row"
+  *ngIf="selectedProducto; else mensaje"
+>
   <div class="imagen" fxFlex="20">
     <img
-      *ngIf="producto.image; else noImage"
+      *ngIf="selectedProducto.image; else noImage"
       mat-card-image
-      [src]="producto.image"
-      alt="{{ producto.name }}"
+      [src]="selectedProducto.image"
+      alt="{{ selectedProducto.name }}"
     />
     <ng-template #noImage> Sin Imagen </ng-template>
   </div>
@@ -12,27 +16,27 @@
     <table>
       <tr>
         <th scope="col">Nombre:</th>
-        <td>{{ producto.name | uppercase }}</td>
+        <td>{{ selectedProducto.name | uppercase }}</td>
       </tr>
       <tr>
         <th>Marca:</th>
-        <td>{{ producto.brand | uppercase }}</td>
+        <td>{{ selectedProducto.brand | uppercase }}</td>
       </tr>
       <tr>
         <th>Categoría:</th>
-        <td>{{ producto.category }}</td>
+        <td>{{ selectedProducto.category }}</td>
       </tr>
       <tr>
         <th>Sku:</th>
-        <td>{{ producto.sku }}</td>
+        <td>{{ selectedProducto.sku }}</td>
       </tr>
       <tr>
         <th>Cantidad disponible:</th>
-        <td>{{ producto.stock }}</td>
+        <td>{{ selectedProducto.stock }}</td>
       </tr>
       <tr>
         <th>Precio:</th>
-        <td>{{ producto.price | currency }}</td>
+        <td>{{ selectedProducto.price | currency }}</td>
       </tr>
     </table>
     <div class="button-container">
@@ -51,3 +55,5 @@
     <h1>Seleccione un producto</h1>
   </div>
 </ng-template>
+
+{{ check() }}

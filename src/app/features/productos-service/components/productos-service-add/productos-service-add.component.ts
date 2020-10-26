@@ -32,12 +32,12 @@ export class ProductosServiceAddComponent implements OnInit {
   buildForm() {
     this.control = new FormControl('control');
     this.form = this.formBuilder.group({
-      sku: ['', [Validators.required, Validators.minLength(4)]],
-      name: ['', [Validators.required, Validators.minLength(4)]],
-      brand: ['', Validators.required],
-      category: '',
-      price: ['', Validators.required],
-      stock: ['', Validators.required],
+      sku: ['1222', [Validators.required, Validators.minLength(4)]],
+      name: ['Iphone 12', [Validators.required, Validators.minLength(4)]],
+      brand: ['Apple', Validators.required],
+      category: 'Celulares',
+      price: ['1110', Validators.required],
+      stock: ['2', Validators.required],
       image: '',
     });
   }

@@ -6,7 +6,7 @@ import { WelcomeComponent } from './components/welcome.component';
 import { NotFoundComponent } from './components/not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: '', redirectTo: 'productos-service', pathMatch: 'full' },
 
   // Lazy Load de Módulo
   {
@@ -24,7 +24,13 @@ const routes: Routes = [
         (m) => m.ProductosModule
       ),
   },
-  { path: 'productos-service', loadChildren: () => import('./features/productos-service/productos-service.module').then(m => m.ProductosServiceModule) },
+  {
+    path: 'productos-service',
+    loadChildren: () =>
+      import('./features/productos-service/productos-service.module').then(
+        (m) => m.ProductosServiceModule
+      ),
+  },
   { path: '**', component: NotFoundComponent },
 ];
 

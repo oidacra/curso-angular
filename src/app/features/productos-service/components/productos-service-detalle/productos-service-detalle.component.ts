@@ -1,30 +1,32 @@
 import { IProductos } from './../../../productos/models/productos';
 import { ProductosService } from './../../services/productos.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { Subscription, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-productos-service-detalle',
   templateUrl: './productos-service-detalle.component.html',
   styleUrls: ['./productos-service-detalle.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush, // <- Comentar y ver en consola la cantidad de veces que se hace check()changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductosServiceDetalleComponent implements OnInit, OnDestroy {
-  producto: IProductos;
-  private __suscriptions = new Subscription();
+  @Input('producto') // <- Puedo utilizar un Alias del input, e internamente llamarlo de otra forma
+  selectedProducto: IProductos;
+
   constructor(
     private productosServices: ProductosService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.__suscriptions.add(
-      this.productosServices.selectedProductData.subscribe(
-        (producto: IProductos) => {
-          this.producto = producto;
-        }
-      )
-    );
+    console.log('Created: ProductosServiceDetalleComponent');
   }
 
   clearSelected() {
@@ -33,6 +35,12 @@ export class ProductosServiceDetalleComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.__suscriptions.unsubscribe();
+    console.log('Destroy: ProductosServiceDetalleComponent');
+  }
+
+  check() {
+    console.log(
+      'View del Componente [ProductosServiceDetalleComponent] verificado'
+    );
   }
 }
