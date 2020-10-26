@@ -3,13 +3,13 @@ import { ProductosService } from './../../services/productos.service';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+
+import { MatDialog } from '@angular/material/dialog';
+import { ProductosServiceAddComponent } from '../productos-service-add/productos-service-add.component';
 
 @Component({
   selector: 'app-productos-service-listado',
@@ -24,20 +24,23 @@ export class ProductosServiceListadoComponent implements OnInit, OnDestroy {
   @Input()
   selectedId: number;
 
-  public productos$;
-  public productosObservable$;
-
   constructor(
     private productosServices: ProductosService,
-    private router: Router
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     console.log('Created: ProductosServiceListadoComponent');
   }
 
-  goToProduct(productId) {
-    this.router.navigate(['productos-service', productId]);
+  selectProduct(productId) {
+    this.productosServices.selectProducto(productId);
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ProductosServiceAddComponent, {
+      width: '600px',
+    });
   }
   ngOnDestroy() {
     console.log('Destroy component: ProductosServiceListadoComponent');

@@ -4,77 +4,93 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 import {
   BehaviorSubject,
   combineLatest,
+  EMPTY,
+  merge,
   Observable,
   Subject,
   throwError,
 } from 'rxjs';
-import { from } from 'rxjs';
-import { map, tap, shareReplay, catchError } from 'rxjs/operators';
+
+import {
+  map,
+  tap,
+  shareReplay,
+  catchError,
+  scan,
+  filter,
+} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductosService {
-  private productsUrl = 'assets/products.json';
-  private __products: IProductos[] | undefined;
+  private productsUrl = '/api/productos';
 
-  products$ = this.httpClient.get<IProductos[]>(this.productsUrl).pipe(
-    tap((data) => console.log('Products', JSON.stringify(data))),
-    catchError(this.handleError)
+  private __productDataBehaviorSubject = new Subject<IProductos[]>();
+  products$ = this.__productDataBehaviorSubject.asObservable();
+
+  private __productSelectedIdSubject = new BehaviorSubject<number>(0);
+
+  // Action Stream
+  private __productInsertedSubject = new Subject<IProductos>();
+  productInsertedAction$ = this.__productInsertedSubject.asObservable();
+
+  productsWithAdd$ = merge(this.products$, this.productInsertedAction$).pipe(
+    scan((acc: IProductos[], value: IProductos) => {
+      return [...acc, value];
+    }),
+    catchError((err) => {
+      return throwError(err);
+    })
   );
 
-  private __productosBehaviorSubject = new BehaviorSubject<IProductos[]>(null);
-
-  private productSelectedIdSubject = new BehaviorSubject<number>(0);
-
   selectedProduct$ = combineLatest([
-    this.products$,
+    this.productsWithAdd$,
     this.productoSelectedId$,
   ]).pipe(
     map(([products, selectedProductId]) => {
-      //console.log(products); // <- Valor emitido de primer observable
-      //console.log(selectedProductId); // Valor emitido del segundo observable
-      return products.find((product) => product.id === selectedProductId);
+      console.log(products); // <- Valor emitido de primer observable
+      console.log(selectedProductId); // Valor emitido del segundo observable
+      if (products) {
+        return products.find((product) => product.id === selectedProductId);
+      }
     }),
     tap((product) => console.log('selectedProduct', product)),
     shareReplay(1)
   );
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private http: HttpClient) {
+    console.log('constructor load data');
 
-  get productos$() {
-    return this.__productosBehaviorSubject.asObservable();
-  }
-  get productoSelectedId$() {
-    return this.productSelectedIdSubject.asObservable();
-  }
+    this.http
+      .get<IProductos[]>(this.productsUrl)
+      .pipe(
+        tap((data) => console.log('Products', JSON.stringify(data))),
+        catchError(this.handleError)
+      )
+      .subscribe((data: IProductos[]) => {
+        console.log(data);
 
-  public getAll() {
-    this.httpClient
-      .get<IProductos[]>('assets/products.json')
-      .subscribe((productos: IProductos[]) => {
-        // Lo guardo para despues
-        this.__products = productos;
-        // Emito
-        console.log(productos);
-        this.__productosBehaviorSubject.next(this.__products);
+        this.__productDataBehaviorSubject.next(data);
       });
   }
 
+  get productoSelectedId$() {
+    return this.__productSelectedIdSubject.asObservable();
+  }
+
   public selectProducto(productId: number) {
-    this.productSelectedIdSubject.next(productId);
-    //return from([productoSelectedData]);
+    this.__productSelectedIdSubject.next(productId);
   }
 
   public clearSelected() {
-    this.productSelectedIdSubject.next(0);
+    this.__productSelectedIdSubject.next(0);
   }
 
   public add(producto: IProductos) {
-    producto.id = this.__products.length + 1;
-    this.__products.push(producto);
+    producto.id = Math.floor(Math.random() * 100); // genero un id random, esto puede asignar numeros que ya esten utilizados, en un api normal el backend se encarga de hacer esot
 
-    this.__productosBehaviorSubject.next(this.__products);
+    this.__productInsertedSubject.next(producto);
   }
 
   private handleError(err: any): Observable<never> {

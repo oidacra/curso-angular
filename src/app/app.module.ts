@@ -2,6 +2,7 @@ import { MenuComponent } from './core/components/menu.component';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CoreModule } from './core/core.module';
 
@@ -15,8 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { ProductosService } from './features/productos-service/services/productos.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,9 +26,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     RouterModule,
+    AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    AppRoutingModule,
+
     // Material
     MatToolbarModule,
     MatIconModule,
@@ -37,7 +37,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatListModule,
   ],
-  //providers: [ProductosService],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

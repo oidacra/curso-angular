@@ -1,5 +1,3 @@
-import { IProductos } from './../../../productos/models/productos';
-import { Router } from '@angular/router';
 import { ProductosService } from './../../services/productos.service';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -8,7 +6,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
+
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-productos-service-add',
@@ -18,11 +17,11 @@ import { Observable } from 'rxjs';
 export class ProductosServiceAddComponent implements OnInit {
   public form: FormGroup;
   control: FormControl;
-  tmp$: Observable<IProductos[]>;
+  tmp$ = this.productosService.productsWithAdd$;
   constructor(
+    public dialogRef: MatDialogRef<ProductosServiceAddComponent>,
     private formBuilder: FormBuilder,
-    private productosService: ProductosService,
-    private router: Router
+    private productosService: ProductosService
   ) {}
 
   ngOnInit(): void {
@@ -43,14 +42,13 @@ export class ProductosServiceAddComponent implements OnInit {
   }
   onSubmit() {
     if (this.form.valid) {
-      console.log('Form Submitted!');
       this.productosService.add(this.form.value);
-      this.router.navigate(['/productos-service']);
-      this.tmp$ = this.productosService.productos;
+      this.dialogRef.close();
       this.form.disable();
     }
   }
   resetForm() {
     this.form.reset();
+    this.form.enable();
   }
 }

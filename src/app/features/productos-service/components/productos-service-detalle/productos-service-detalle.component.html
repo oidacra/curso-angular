@@ -10,7 +10,13 @@
       [src]="selectedProducto.image"
       alt="{{ selectedProducto.name }}"
     />
-    <ng-template #noImage> Sin Imagen </ng-template>
+    <ng-template #noImage>
+      <img
+        mat-card-image
+        [src]="'assets/Imagen_no_disponible.png'"
+        alt="{{ selectedProducto.name }}"
+      />
+    </ng-template>
   </div>
   <div class="detalles" fxFlex="80">
     <table>

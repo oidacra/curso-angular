@@ -1,5 +1,3 @@
-import { IProductos } from './../../../productos/models/productos';
-import { ProductosService } from './../../services/productos.service';
 import {
   Component,
   Input,
@@ -7,9 +5,9 @@ import {
   OnInit,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
-import { Router } from '@angular/router';
 
+import { IProductos } from './../../../productos/models/productos';
+import { ProductosService } from './../../services/productos.service';
 @Component({
   selector: 'app-productos-service-detalle',
   templateUrl: './productos-service-detalle.component.html',
@@ -20,18 +18,14 @@ export class ProductosServiceDetalleComponent implements OnInit, OnDestroy {
   @Input('producto') // <- Puedo utilizar un Alias del input, e internamente llamarlo de otra forma
   selectedProducto: IProductos;
 
-  constructor(
-    private productosServices: ProductosService,
-    private router: Router
-  ) {}
+  constructor(private productosServices: ProductosService) {}
 
   ngOnInit(): void {
     console.log('Created: ProductosServiceDetalleComponent');
   }
 
   clearSelected() {
-    this.router.navigate(['/productos-service']);
-    //this.productosServices.clearSelected();
+    this.productosServices.clearSelected();
   }
 
   ngOnDestroy() {
