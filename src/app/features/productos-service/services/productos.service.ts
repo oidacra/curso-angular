@@ -107,7 +107,8 @@ export class ProductosService {
   }
 
   // FIREBASE
-  getAllFromFirebase(isActive: boolean = true): Observable<IProductos[]> {
-    return this.firestore.collection<IProductos>('productos').valueChanges(); // <- Returns an Observable of document data. All Snapshot metadata is stripped. This method provides only the data.
+  getAllFromFirebase(): Observable<IProductos[]> {
+    return this.firestore.collection<IProductos>('productos').valueChanges();
+    // <- Returns an Observable of document data. All Snapshot metadata is stripped. This method provides only the data.
   }
 }

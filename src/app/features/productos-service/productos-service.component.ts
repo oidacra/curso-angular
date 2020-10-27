@@ -24,7 +24,7 @@ export class ProductosServiceComponent implements OnInit, OnDestroy {
     // Id seleccionado
     this.selectedId$ = this.productosServices.productoSelectedId$;
 
-    //this.productsFromFirebase$ = this.productosServices.getAllFromFirebase();
+    this.productsFromFirebase$ = this.productosServices.getAllFromFirebase();
   }
   ngOnInit() {
     console.log('Creado ProductosServiceComponent');
