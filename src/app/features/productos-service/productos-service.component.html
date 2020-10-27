@@ -17,3 +17,10 @@
   >
   </app-productos-service-detalle>
 </div>
+
+<h1>From Firebase</h1>
+<ul>
+  <li *ngFor="let prod of productsFromFirebase$ | async as producto">
+    {{ prod.name }}
+  </li>
+</ul>

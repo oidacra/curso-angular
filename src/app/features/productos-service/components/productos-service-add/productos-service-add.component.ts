@@ -42,7 +42,9 @@ export class ProductosServiceAddComponent implements OnInit {
   }
   onSubmit() {
     if (this.form.valid) {
-      this.productosService.add(this.form.value);
+      this.productosService
+        .add(this.form.value)
+        .subscribe((val) => console.log(val));
       this.dialogRef.close();
       this.form.disable();
     }

@@ -13,6 +13,7 @@ export class ProductosServiceComponent implements OnInit, OnDestroy {
   productos$: Observable<IProductos[]>; // La asignación se puede hacer directo aqui
   selectedProducto$: Observable<IProductos>; // La asignación se puede hacer directo aqui
   selectedId$: Observable<number>; // La asignación se puede hacer directo aqui
+  productsFromFirebase$: Observable<IProductos[]>;
 
   constructor(private productosServices: ProductosService) {
     // datos del producto seleccionado
@@ -22,6 +23,8 @@ export class ProductosServiceComponent implements OnInit, OnDestroy {
     this.productos$ = this.productosServices.productsWithAdd$;
     // Id seleccionado
     this.selectedId$ = this.productosServices.productoSelectedId$;
+
+    this.productsFromFirebase$ = this.productosServices.getAllFromFirebase();
   }
   ngOnInit() {
     console.log('Creado ProductosServiceComponent');
