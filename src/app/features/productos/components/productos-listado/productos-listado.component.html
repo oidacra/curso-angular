@@ -2,7 +2,12 @@
   <div class="top" fxLayout="row" fxLayoutAlign="space-around center">
     <h2>Productos disponibles</h2>
 
-    <button (click)="openDialog()" mat-mini-fab aria-label="Add product">
+    <button
+      *isAuthorized="isLogged$ | async"
+      (click)="openDialog()"
+      mat-mini-fab
+      aria-label="Add product"
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>

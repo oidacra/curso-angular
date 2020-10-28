@@ -8,6 +8,7 @@
       <div class="top-bar">
         <app-topbar
           (toggleButton)="drawerToggle($event)"
+          [user]="user$ | async"
           fxLayout="row"
         ></app-topbar>
       </div>

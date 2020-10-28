@@ -1,3 +1,4 @@
+import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -5,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reactive-form',
@@ -59,6 +61,11 @@ import {
           </button>
         </div>
       </form>
+      <br />
+      <mat-divider></mat-divider> <br />
+      <button mat-flat-button color="primary" (click)="loginWithGoogle()">
+        Login con Gmail
+      </button>
 
       <!-- <p>¿Dirty?: {{ form.dirty }}</p>
       <p>Pristine?: {{ form.pristine }}</p>
@@ -99,8 +106,13 @@ import {
 export class ReactiveFormComponent implements OnInit {
   // Creación de property para el Group principal del form
   form: FormGroup;
+
   // Inyectamos FormBuilder que es un servicio para crear forms.
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   // obtener una property del class por getter
   get password(): FormControl {
@@ -124,11 +136,19 @@ export class ReactiveFormComponent implements OnInit {
   onSubmit() {
     console.warn(this.form.value);
     if (this.form.valid) {
+      alert('Login con api sin implementar');
       console.warn(this.form.value);
       // Envío data al servicio y espero si valida o no
       // Si valida hago redirect
       // si no, muestro un mensaje de error al usuario
     }
+  }
+
+  loginWithGoogle() {
+    this.authService.createUserWithGoogle().subscribe((user) => {
+      console.log(user);
+      this.router.navigate(['/']);
+    });
   }
 
   // Método de reset del formulario

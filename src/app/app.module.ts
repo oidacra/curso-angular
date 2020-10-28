@@ -1,3 +1,5 @@
+import { IsAuthorizedDirective } from './commons/directives/access-control.directive';
+
 import { MenuComponent } from './core/components/menu.component';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +22,9 @@ import { MatListModule } from '@angular/material/list';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
+
+// Servicios
+import { AuthService } from './core/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +50,7 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
   ],
+  providers: [AuthService],
 
   bootstrap: [AppComponent],
 })

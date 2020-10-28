@@ -1,3 +1,4 @@
+import { IsAuthorizedDirective } from './../../commons/directives/access-control.directive';
 import { ProductosService } from './services/productos.service';
 import { SharedModule } from '../../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -14,6 +15,7 @@ import { ProductosComponent } from './productos.component';
     ProductosListadoComponent,
     ProductosDetalleComponent,
     ProductosAddComponent,
+    IsAuthorizedDirective,
   ],
   imports: [SharedModule, ProductosRoutingModule],
   providers: [ProductosService],

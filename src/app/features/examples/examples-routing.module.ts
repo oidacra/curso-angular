@@ -61,7 +61,7 @@ const routes: Routes = [
     component: TemplateDrivenComponent,
   },
   {
-    path: 'reactive-form',
+    path: 'login',
     component: ReactiveFormComponent,
   },
 ];
