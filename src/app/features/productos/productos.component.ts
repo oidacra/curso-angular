@@ -1,8 +1,5 @@
-import { Producto } from './model/producto.model';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IProductos } from './productos';
 import { ProductosService } from './services/productos.service';
 
 @Component({

@@ -15,6 +15,7 @@ export class ProductosService {
   products$ = this.firestore
     .collection<Producto>('productos')
     .valueChanges({ idField: 'id' });
+
   // Subject para el manejo del selected id
   private __productSelectedIdSubject = new BehaviorSubject<string>('');
 

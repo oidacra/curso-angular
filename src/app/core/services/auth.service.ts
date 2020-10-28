@@ -9,12 +9,13 @@ import * as _ from 'underscore';
 export class AuthService {
   user$ = this.afAuth.authState;
   constructor(private readonly afAuth: AngularFireAuth) {}
+
   createUserWithGoogle(): Observable<auth.UserCredential> {
     const provider = new auth.GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
+
     return from(
       this.afAuth
+
         .signInWithPopup(provider)
         .then((userCredentials: auth.UserCredential) => {
           console.log(userCredentials);
@@ -35,6 +36,10 @@ export class AuthService {
       { code: 'auth/invalid-email', message: 'Correo inválido' },
       { code: 'auth/user-disabled', message: 'Cuenta deshabilitada' },
       { code: 'auth/weak-password', message: 'La contraseña es muy débil' },
+      {
+        code: 'auth/operation-not-allowed',
+        message: 'Debes activar el proveedor en el firebase',
+      },
       {
         code: 'auth/email-already-in-use',
         message: 'Ya esta registrado con este correo',
