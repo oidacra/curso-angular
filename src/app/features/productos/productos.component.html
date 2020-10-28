@@ -1,14 +1,17 @@
-<div class="productos-page" fxFlexFill fxLayout="row">
-  <app-productos-listado
-    fxFlex="20"
-    [productos]="products"
-    [selectedId]="selectedProductId"
-    (selectedItemChild)="selectedProductParent($event)"
-  ></app-productos-listado>
+<div class="productos-page" fxLayout="column">
+  <h1>Angular - Firebase</h1>
+  <div fxLayout="row" fxFlexFill fxLayoutAlign="space-around start">
+    <app-productos-listado
+      fxFlex="20"
+      [productos]="productos$ | async"
+      [selectedId]="productoSelectedId$ | async"
+    >
+    </app-productos-listado>
 
-  <app-productos-detalle
-    fxFlex="80"
-    [producto]="productoSelectedParent"
-    (clearSelectionChild)="resetSelection()"
-  ></app-productos-detalle>
+    <app-productos-detalle
+      fxFlex="75"
+      [producto]="productoSelectedData | async"
+    >
+    </app-productos-detalle>
+  </div>
 </div>

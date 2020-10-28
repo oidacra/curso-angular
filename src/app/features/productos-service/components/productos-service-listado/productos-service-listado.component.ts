@@ -1,4 +1,4 @@
-import { IProductos } from './../../../productos/models/productos';
+import { IProductos } from './../../../productos/productos';
 import { ProductosService } from './../../services/productos.service';
 import {
   ChangeDetectionStrategy,

@@ -1,4 +1,3 @@
-import { IProductos } from './../../productos/models/productos';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
@@ -12,6 +11,7 @@ import {
 
 import { map, tap, shareReplay, catchError, scan } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { IProductos } from '../../productos/productos';
 
 @Injectable({
   providedIn: 'root',
@@ -110,5 +110,20 @@ export class ProductosService {
   getAllFromFirebase(): Observable<IProductos[]> {
     return this.firestore.collection<IProductos>('productos').valueChanges();
     // <- Returns an Observable of document data. All Snapshot metadata is stripped. This method provides only the data.
+  }
+  create(data) {
+    return this.firestore.collection('productos').add(data);
+  }
+  update(data) {
+    return this.firestore
+      .collection('productos')
+      .doc(data.payload.doc.id)
+      .set({ completed: true }, { merge: true });
+  }
+  delete(data) {
+    return this.firestore
+      .collection('productos')
+      .doc(data.payload.doc.id)
+      .delete();
   }
 }

@@ -1,4 +1,4 @@
-import { IProductos } from '../productos/models/productos';
+import { IProductos } from './../productos/productos';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 import { Injectable } from '@angular/core';

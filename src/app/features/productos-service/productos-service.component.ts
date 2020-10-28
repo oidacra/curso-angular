@@ -1,8 +1,8 @@
-import { IProductos } from './../productos/models/productos';
 import { Observable } from 'rxjs';
 
 import { ProductosService } from './services/productos.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IProductos } from '../productos/productos';
 
 @Component({
   selector: 'app-productos-service',

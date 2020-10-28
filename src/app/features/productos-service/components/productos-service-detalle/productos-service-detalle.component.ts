@@ -1,3 +1,4 @@
+import { IProductos } from './../../../productos/productos';
 import {
   Component,
   Input,
@@ -6,7 +7,6 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 
-import { IProductos } from './../../../productos/models/productos';
 import { ProductosService } from './../../services/productos.service';
 @Component({
   selector: 'app-productos-service-detalle',

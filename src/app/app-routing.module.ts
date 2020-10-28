@@ -6,7 +6,7 @@ import { WelcomeComponent } from './components/welcome.component';
 import { NotFoundComponent } from './components/not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'productos-service', pathMatch: 'full' },
+  { path: '', redirectTo: 'productos', pathMatch: 'full' },
 
   // Lazy Load de Módulo
   {

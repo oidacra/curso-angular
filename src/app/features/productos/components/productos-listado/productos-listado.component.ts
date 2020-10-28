@@ -1,34 +1,36 @@
-import { IProductos } from './../../models/productos';
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-} from '@angular/core';
-import { SimpleChanges } from '@angular/core';
+import { Producto } from './../../model/producto.model';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
+import { MatDialog } from '@angular/material/dialog';
+import { ProductosAddComponent } from '../productos-add/productos-add.component';
+
+import { ProductosService } from '../../services/productos.service';
 
 @Component({
   selector: 'app-productos-listado',
   templateUrl: './productos-listado.component.html',
   styleUrls: ['./productos-listado.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush, // <- Comentar y ver en consola la cantidad de veces que se hace check()changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductosListadoComponent implements OnChanges {
-  // Entrada de componente
+export class ProductosListadoComponent {
   @Input()
-  productos: IProductos[];
+  productos: Producto[];
 
   @Input()
-  selectedId: number;
-  // Salida de componente
-  @Output()
-  selectedItemChild = new EventEmitter<number>();
+  selectedId: string;
 
-  selectProducto(productoId: number) {
-    this.selectedItemChild.emit(productoId);
+  constructor(
+    private productosService: ProductosService,
+    public dialog: MatDialog
+  ) {}
+
+  selectProduct(productId) {
+    this.productosService.selectProducto(productId);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
+  openDialog() {
+    const dialogRef = this.dialog.open(ProductosAddComponent, {
+      width: '600px',
+    });
   }
 }

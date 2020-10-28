@@ -1,26 +1,17 @@
-<div
-  class="productos-page"
-  fxFlexFill
-  fxLayout="row"
-  fxLayoutAlign="space-around start"
->
-  <app-productos-service-listado
-    fxFlex="20"
-    [productos]="productos$ | async"
-    [selectedId]="selectedId$ | async"
-  >
-  </app-productos-service-listado>
+<div class="productos-page" fxLayout="column">
+  <h1>Angular - Reactive</h1>
+  <div fxLayout="row" fxFlexFill fxLayoutAlign="space-around start">
+    <app-productos-service-listado
+      fxFlex="20"
+      [productos]="productos$ | async"
+      [selectedId]="selectedId$ | async"
+    >
+    </app-productos-service-listado>
 
-  <app-productos-service-detalle
-    fxFlex="75"
-    [producto]="selectedProducto$ | async"
-  >
-  </app-productos-service-detalle>
+    <app-productos-service-detalle
+      fxFlex="75"
+      [producto]="selectedProducto$ | async"
+    >
+    </app-productos-service-detalle>
+  </div>
 </div>
-
-<h1>From Firebase</h1>
-<ul>
-  <li *ngFor="let prod of productsFromFirebase$ | async as producto">
-    {{ prod.name }}
-  </li>
-</ul>

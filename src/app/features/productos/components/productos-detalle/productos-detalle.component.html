@@ -1,37 +1,69 @@
-<div class="detalle-container" fxLayout="row" *ngIf="producto; else mensaje">
+<div
+  class="detalle-container"
+  fxLayout="row"
+  *ngIf="selectedProducto; else mensaje"
+>
   <div class="imagen" fxFlex="20">
-    <img mat-card-image [src]="producto.image" alt="{{ producto.name }}" />
+    <img
+      *ngIf="selectedProducto.image; else noImage"
+      mat-card-image
+      [src]="selectedProducto.image"
+      alt="{{ selectedProducto.name }}"
+    />
+    <ng-template #noImage>
+      <img
+        mat-card-image
+        [src]="'assets/Imagen_no_disponible.png'"
+        alt="{{ selectedProducto.name }}"
+      />
+    </ng-template>
   </div>
   <div class="detalles" fxFlex="80">
     <table>
       <tr>
         <th scope="col">Nombre:</th>
-        <td>{{ producto.name | uppercase }}</td>
+        <td>{{ selectedProducto.name | uppercase }}</td>
       </tr>
       <tr>
         <th>Marca:</th>
-        <td>{{ producto.brand | uppercase }}</td>
+        <td>{{ selectedProducto.brand | uppercase }}</td>
       </tr>
       <tr>
         <th>Categoría:</th>
-        <td>{{ producto.category }}</td>
+        <td>{{ selectedProducto.category }}</td>
       </tr>
       <tr>
         <th>Sku:</th>
-        <td>{{ producto.sku }}</td>
+        <td>{{ selectedProducto.sku }}</td>
       </tr>
       <tr>
         <th>Cantidad disponible:</th>
-        <td>{{ producto.stock }}</td>
+        <td>{{ selectedProducto.stock }}</td>
       </tr>
       <tr>
         <th>Precio:</th>
-        <td>{{ producto.price | currency }}</td>
+        <td>{{ selectedProducto.price | currency }}</td>
       </tr>
     </table>
     <div class="button-container">
       <button
-        mat-mini-fab
+        mat-icon-button
+        color="primary"
+        aria-label="editar product"
+        (click)="openDialog()"
+      >
+        <mat-icon>create</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Delete product"
+        (click)="deleteProduct(selectedProducto.id)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button
+        mat-icon-button
         aria-label="Deselect product"
         (click)="clearSelected()"
       >
@@ -43,5 +75,6 @@
 <ng-template #mensaje>
   <div class="detalle-container">
     <h1>Seleccione un producto</h1>
+    <p>Bienvenido al Curso de Aplicaciones Web con Angular</p>
   </div>
 </ng-template>
